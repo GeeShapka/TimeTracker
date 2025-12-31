@@ -1,8 +1,10 @@
 #pragma once
+#pragma warning(disable: 4996)
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
 #include <time.h>
+#include "SDL3/SDL.h"
 
 
 #define APPEND "a+"
@@ -17,4 +19,4 @@
 
 void getTimeVariables(int*, int*, int*, int*, int*, struct tm*);
 int openFile(FILE**, const char*, const char*);
-void printErrno(void);
+void printErrnoNumber(void);

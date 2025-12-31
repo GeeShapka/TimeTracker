@@ -3,6 +3,18 @@
 
 int main(void)
 {
+	bool errorOccured = false;
+	bool sdlOpen = false;
+	bool fileOpen = false;
+
+
+	if (SDL_Init(SDL_INIT_VIDEO) < 0)
+	{
+		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "ERROR", SDL_GetError(), NULL);
+		return EXIT_FAILURE;
+	}
+	sdlOpen = true;
+
 	//get current time
 	time_t currentTimeSeconds = time(NULL);
 	struct tm* timeStruct = localtime(&currentTimeSeconds);
@@ -19,9 +31,10 @@ int main(void)
 	FILE* file = NULL;
 	if (openFile(&file, APPEND, FILENAME) == EXIT_FAILURE)
 	{
-		return EXIT_FAILURE;
+		errorOccured = true;
+		goto cleanup;
 	}
-
+	fileOpen = true;
 
 
 	//check if last character is e to know if program should abort
@@ -30,21 +43,18 @@ int main(void)
 	fseek(file, 0, SEEK_END);
 	if (ftell(file) != 0)
 	{
+		char nextCharacter = '\0';
 		//if not, go the the second last position
 		fseek(file, -1, SEEK_END);
-		char nextCharacter[TIME_SIZES];
 		//read the last character
-		fread(nextCharacter, 1, 1, file);
+		fread(&nextCharacter, 1, 1, file);
 		//if its e, it needs to wait for an end time to be entered
-		if (*nextCharacter == 'e')
+		if (nextCharacter == 'e')
 		{
-			fprintf(file, "e");
-			printf("File needs entry end\n");
-			return(EXIT_FAILURE);
-		}
-		else
-		{
-			fprintf(file, nextCharacter);
+			printf("File needs current entry to be ended\n");
+			SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "MESSAGE", "File needs current entry to be ended", NULL);
+			errorOccured = true;
+			goto cleanup;
 		}
 	}
 
@@ -53,27 +63,43 @@ int main(void)
 
 	//create strings
 	char date[TIME_SIZES] = { 0 };
-	sprintf(date, "%d/%d/%d", day, month, year);
+	snprintf(date, TIME_SIZES, "%d/%d/%d", day, month, year);
 	char timeVar[TIME_SIZES] = { 0 };
-	sprintf(timeVar, "%d:%d", hour, minute);
+	snprintf(timeVar, TIME_SIZES, "%d:%d", hour, minute);
 	char entry[ENTRY_SIZE] = { 0 };
 	//add e to the end to indicate that an end entry must be submitted
-	sprintf(entry, "Date %s%s%s Start %s%s%se", DELIMITER, date, DELIMITER, DELIMITER, timeVar, DELIMITER);
+	snprintf(entry, ENTRY_SIZE, "Date %s%s%s Start %s%s%se", DELIMITER, date, DELIMITER, DELIMITER, timeVar, DELIMITER);
 
 	//write to file
 	fprintf(file, "%s", entry);
-	printf(entry);
 
+	goto cleanup;
+
+cleanup:
 	//close file
-	if (fclose(file) == EOF)
+	if (fileOpen == true)
 	{
-		printErrno();
-		perror("Error closing file: ");
+		if (fclose(file) == EOF)
+		{
+			//printErrnoNumber();
+			//perror("Error closing file: ");
+			//sdl might not be open, so check if it is
+			if (sdlOpen)
+			{
+				SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "ERROR", strerror(errno), NULL);
+			}
+			errorOccured = true;
+		}
+	}
+	//close sdl
+	if (sdlOpen)
+	{
+		SDL_Quit();
+	}
+	if (errorOccured)
+	{
 		return EXIT_FAILURE;
 	}
-
 	return EXIT_SUCCESS;
 }
-
-
 

@@ -15,8 +15,8 @@ void getTimeVariables(int* day, int* month, int* year, int* hour, int* minute, s
 	*day = timeStruct->tm_mday;
 	*month = (timeStruct->tm_mon) + 1;
 	*year = (timeStruct->tm_year) + 1900;
-	*hour = (timeStruct->tm_hour) + 1;
-	*minute = (timeStruct->tm_min) + 1;
+	*hour = (timeStruct->tm_hour);
+	*minute = (timeStruct->tm_min);
 	return;
 }
 
@@ -32,8 +32,9 @@ int openFile(FILE** file, const char* method, const char* fileName)
 	*file = fopen(fileName, method);
 	if (*file == NULL)
 	{
-		printErrno();
-		perror("Error opening file: ");
+		//printErrnoNumber();
+		//perror("Error opening file: ");
+		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "ERROR", strerror(errno), NULL);
 		return EXIT_FAILURE;
 	}
 	return EXIT_SUCCESS;
@@ -43,7 +44,7 @@ int openFile(FILE** file, const char* method, const char* fileName)
 /// prints the int value of errno with a trailing space
 /// </summary>
 /// <param name=""></param>
-void printErrno(void)
+void printErrnoNumber(void)
 {
-	printf("%d ", errno);
+	//printf("%d ", errno);
 }
