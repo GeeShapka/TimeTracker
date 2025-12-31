@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <time.h>
+#define SDL_MAIN_HANDLED
 #include "SDL3/SDL.h"
 
 
@@ -12,7 +13,8 @@
 
 #define FILENAME "TimeTracker.txt"
 
-#define DELIMITER "|"
+#define DELIMITER '|'
+#define STARTEND_DELIMITER '~'
 
 #define ENTRY_SIZE 150
 #define TIME_SIZES 20

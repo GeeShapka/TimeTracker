@@ -1,6 +1,5 @@
 #include "shared.h"
 
-
 int main(void)
 {
 	bool errorOccured = false;
@@ -37,7 +36,7 @@ int main(void)
 	fileOpen = true;
 
 
-	//check if last character is e to know if program should abort
+	//check if last character is e to know if program should append
 
 	//check if file is empty
 	fseek(file, 0, SEEK_END);
@@ -48,13 +47,19 @@ int main(void)
 		fseek(file, -1, SEEK_END);
 		//read the last character
 		fread(&nextCharacter, 1, 1, file);
-		//if its e, it needs to wait for an end time to be entered
-		if (nextCharacter == STARTEND_DELIMITER)
+		//if its not e, an entry must be created by other program
+		if (nextCharacter != STARTEND_DELIMITER)
 		{
-			SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "MESSAGE", "File needs current entry to be ended in order to create a new entry", NULL);
+			SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "MESSAGE", "File needs an entry to be created in order to end", NULL);
 			errorOccured = true;
 			goto cleanup;
 		}
+	}
+	else
+	{
+		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "ERROR", "File is Empty", NULL);
+		errorOccured = true;
+		goto cleanup;
 	}
 
 	//return to the end to append
@@ -67,12 +72,15 @@ int main(void)
 	snprintf(timeVar, TIME_SIZES, "%d:%d", hour, minute);
 	char entry[ENTRY_SIZE] = { 0 };
 	//add seperate delimiter to the end to indicate that an end entry must be submitted
-	snprintf(entry, ENTRY_SIZE, "Start %c%s%c%s%c%c", DELIMITER, date, DELIMITER, timeVar, DELIMITER, STARTEND_DELIMITER);
+	snprintf(entry, ENTRY_SIZE, "End %c%s%c%s%c\n", DELIMITER, date, DELIMITER, timeVar, DELIMITER);
 
 	//write to file
 	fprintf(file, "%s", entry);
 
 	goto cleanup;
+
+
+
 
 cleanup:
 	//close file
@@ -101,4 +109,3 @@ cleanup:
 	}
 	return EXIT_SUCCESS;
 }
-

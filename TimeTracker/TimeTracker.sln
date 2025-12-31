@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SharedResources", "SharedRe
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SDL3", "..\..\Librarys\SDL-release-3.2.28\VisualC\SDL\SDL.vcxproj", "{81CE8DAF-EBB2-4761-8E45-B71ABCCA8C68}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TimeTracker_FinishEntry", "TimeTracker_FinishEntry\TimeTracker_FinishEntry.vcxproj", "{4C1506AB-3666-4602-A963-665DEFD03043}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -33,6 +35,14 @@ Global
 		{81CE8DAF-EBB2-4761-8E45-B71ABCCA8C68}.Release|x64.Build.0 = Release|x64
 		{81CE8DAF-EBB2-4761-8E45-B71ABCCA8C68}.Release|x86.ActiveCfg = Release|Win32
 		{81CE8DAF-EBB2-4761-8E45-B71ABCCA8C68}.Release|x86.Build.0 = Release|Win32
+		{4C1506AB-3666-4602-A963-665DEFD03043}.Debug|x64.ActiveCfg = Debug|x64
+		{4C1506AB-3666-4602-A963-665DEFD03043}.Debug|x64.Build.0 = Debug|x64
+		{4C1506AB-3666-4602-A963-665DEFD03043}.Debug|x86.ActiveCfg = Debug|Win32
+		{4C1506AB-3666-4602-A963-665DEFD03043}.Debug|x86.Build.0 = Debug|Win32
+		{4C1506AB-3666-4602-A963-665DEFD03043}.Release|x64.ActiveCfg = Release|x64
+		{4C1506AB-3666-4602-A963-665DEFD03043}.Release|x64.Build.0 = Release|x64
+		{4C1506AB-3666-4602-A963-665DEFD03043}.Release|x86.ActiveCfg = Release|Win32
+		{4C1506AB-3666-4602-A963-665DEFD03043}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -41,6 +51,7 @@ Global
 		SolutionGuid = {C45FA8F2-00FE-41A5-B0F6-6DF1BEB67039}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		SharedResources\SharedResources.vcxitems*{4c1506ab-3666-4602-a963-665defd03043}*SharedItemsImports = 4
 		SharedResources\SharedResources.vcxitems*{54e9a951-b1bb-462a-b3bc-18d671c1a5af}*SharedItemsImports = 4
 		SharedResources\SharedResources.vcxitems*{820ae18f-bebb-4319-aff0-1fafe61898b1}*SharedItemsImports = 9
 	EndGlobalSection
