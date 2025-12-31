@@ -1,0 +1,5 @@
+- add a program to add end times
+- add a program to read stats
+	- # of entrys
+	- total time
+	- etc
