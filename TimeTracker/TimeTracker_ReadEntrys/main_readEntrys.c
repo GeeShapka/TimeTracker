@@ -25,6 +25,8 @@ int main(void)
 	}
 	fileOpen = true;
 
+	//check if last character is e to know if program should abort
+
 	//check if file is empty
 	fseek(file, 0, SEEK_END);
 	if (ftell(file) != 0)
@@ -33,9 +35,9 @@ int main(void)
 		//if not empty, go the the second last position
 		fseek(file, -1, SEEK_END);
 		//read the last character
-		fread(&nextCharacter, 1, 1, file);
-		//if its not e, an entry must be created by other program
-		if (nextCharacter == STARTEND_DELIMITER)
+		int itemsRead = fread(&nextCharacter, 1, 1, file);
+		//if its e, it needs to wait for an end time to be entered
+		if (nextCharacter == STARTEND_DELIMITER || itemsRead != 1)
 		{
 			SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_WARNING, WARNING_TITLE, "File needs current entry to be finished\nin order to read entrys", NULL);
 			errorOccured = true;
@@ -48,7 +50,7 @@ int main(void)
 		errorOccured = true;
 		goto cleanup;
 	}
-
+	
 	char line[LINE_SIZE] = { 0 };
 	int lineCount = 0;
 	int totalTime = 0;
