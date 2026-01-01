@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main_finishEntry.c">
+    <ClCompile Include="main_readEntrys.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

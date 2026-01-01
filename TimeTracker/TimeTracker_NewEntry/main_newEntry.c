@@ -10,7 +10,7 @@ int main(void)
 
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
-		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "ERROR", SDL_GetError(), NULL);
+		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, ERROR_TITLE, SDL_GetError(), NULL);
 		return EXIT_FAILURE;
 	}
 	sdlOpen = true;
@@ -31,6 +31,7 @@ int main(void)
 	FILE* file = NULL;
 	if (openFile(&file, APPEND, FILENAME) == EXIT_FAILURE)
 	{
+		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, ERROR_TITLE, strerror(errno), NULL);
 		errorOccured = true;
 		goto cleanup;
 	}
@@ -51,7 +52,7 @@ int main(void)
 		//if its e, it needs to wait for an end time to be entered
 		if (nextCharacter == STARTEND_DELIMITER)
 		{
-			SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "MESSAGE", "File needs current entry to be ended in order to create a new entry", NULL);
+			SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_WARNING, WARNING_TITLE, "File needs current entry to be ended in order to create a new entry", NULL);
 			errorOccured = true;
 			goto cleanup;
 		}
@@ -72,8 +73,6 @@ int main(void)
 	//write to file
 	fprintf(file, "%s", entry);
 
-	goto cleanup;
-
 cleanup:
 	//close file
 	if (fileOpen == true)
@@ -85,7 +84,7 @@ cleanup:
 			//sdl might not be open, so check if it is
 			if (sdlOpen)
 			{
-				SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "ERROR", strerror(errno), NULL);
+				SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, ERROR_TITLE, strerror(errno), NULL);
 			}
 			errorOccured = true;
 		}

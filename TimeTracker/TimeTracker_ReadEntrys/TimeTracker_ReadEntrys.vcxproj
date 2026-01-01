@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{4c1506ab-3666-4602-a963-665defd03043}</ProjectGuid>
-    <RootNamespace>TimeTrackerFinishEntry</RootNamespace>
+    <ProjectGuid>{348dab3d-7aa7-441b-be80-bc73dffc16c1}</ProjectGuid>
+    <RootNamespace>TimeTrackerReadEntrys</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -133,7 +133,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main_finishEntry.c" />
+    <ClCompile Include="main_readEntrys.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
