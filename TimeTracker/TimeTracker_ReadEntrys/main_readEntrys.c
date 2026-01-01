@@ -50,6 +50,8 @@ int main(void)
 		errorOccured = true;
 		goto cleanup;
 	}
+	//return to the start
+	fseek(file, 0, SEEK_SET);
 	
 	char line[LINE_SIZE] = { 0 };
 	int lineCount = 0;
