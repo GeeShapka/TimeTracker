@@ -35,7 +35,7 @@ int main(void)
 		//read the last character
 		fread(&nextCharacter, 1, 1, file);
 		//if its not e, an entry must be created by other program
-		if (nextCharacter != STARTEND_DELIMITER)
+		if (nextCharacter == STARTEND_DELIMITER)
 		{
 			SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_WARNING, WARNING_TITLE, "File needs current entry to be finished\nin order to read entrys", NULL);
 			errorOccured = true;
