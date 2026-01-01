@@ -6,5 +6,5 @@ Double click the .exe corrosponding with the action you wish to do.
 <ul>
   <li>To create an entry, click the NewEntry.exe</li>
   <li>To end an entry, click the FinishEntry.exe</li>
-  <li>To see your time spend, click the ReadEntrys.exe</li>
+  <li>To see your time spent, click the ReadEntrys.exe</li>
 </ul>
