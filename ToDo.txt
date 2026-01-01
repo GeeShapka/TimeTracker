@@ -1,4 +1,1 @@
-- add a program to read stats
-	- # of entrys
-	- total time
-	- etc
+- move check for entry end to shared function

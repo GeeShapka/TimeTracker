@@ -62,14 +62,14 @@ void printErrnoNumber(void)
 /// <returns></returns>
 int getTimeDelta(int sDay, int sMonth, int sYear, int sHour, int sMinute, int eDay, int eMonth, int eYear, int eHour, int eMinute)
 {
-	struct tm sTimeStruct;
+	struct tm sTimeStruct = { 0 };
 	sTimeStruct.tm_mday = sDay;
 	sTimeStruct.tm_mon = sMonth - 1;
 	sTimeStruct.tm_year = sYear - 1900;
 	sTimeStruct.tm_hour = sHour;
 	sTimeStruct.tm_min = sMinute;
 
-	struct tm eTimeStruct;
+	struct tm eTimeStruct = { 0 };
 	eTimeStruct.tm_mday = eDay;
 	eTimeStruct.tm_mon = eMonth - 1;
 	eTimeStruct.tm_year = eYear - 1900;

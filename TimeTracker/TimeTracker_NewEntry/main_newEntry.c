@@ -52,7 +52,7 @@ int main(void)
 		//if its e, it needs to wait for an end time to be entered
 		if (nextCharacter == STARTEND_DELIMITER)
 		{
-			SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_WARNING, WARNING_TITLE, "File needs current entry to be ended in order to create a new entry", NULL);
+			SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_WARNING, WARNING_TITLE, "File needs current entry to be finished\nin order to create a new entry", NULL);
 			errorOccured = true;
 			goto cleanup;
 		}

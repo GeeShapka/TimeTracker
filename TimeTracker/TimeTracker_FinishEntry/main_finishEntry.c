@@ -51,7 +51,7 @@ int main(void)
 		//if its not e, an entry must be created by other program
 		if (nextCharacter != STARTEND_DELIMITER)
 		{
-			SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_WARNING, WARNING_TITLE, "File needs an entry to be created in order to end", NULL);
+			SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_WARNING, WARNING_TITLE, "File needs a new entry to be created\nin order to create an ending", NULL);
 			errorOccured = true;
 			goto cleanup;
 		}

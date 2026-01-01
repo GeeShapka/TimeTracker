@@ -25,7 +25,29 @@ int main(void)
 	}
 	fileOpen = true;
 
-
+	//check if file is empty
+	fseek(file, 0, SEEK_END);
+	if (ftell(file) != 0)
+	{
+		char nextCharacter = '\0';
+		//if not empty, go the the second last position
+		fseek(file, -1, SEEK_END);
+		//read the last character
+		fread(&nextCharacter, 1, 1, file);
+		//if its not e, an entry must be created by other program
+		if (nextCharacter != STARTEND_DELIMITER)
+		{
+			SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_WARNING, WARNING_TITLE, "File needs current entry to be finished\nin order to read entrys", NULL);
+			errorOccured = true;
+			goto cleanup;
+		}
+	}
+	else
+	{
+		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, ERROR_TITLE, "File is Empty", NULL);
+		errorOccured = true;
+		goto cleanup;
+	}
 
 	char line[LINE_SIZE] = { 0 };
 	int lineCount = 0;
@@ -67,8 +89,8 @@ int main(void)
 	}while(!feof(file));
 
 	//get the hour and minute totals
-	int deltaHour;
-	int deltaMinute;
+	int deltaHour = 0;
+	int deltaMinute = 0;
 	getMinutesAndHoursFromSeconds(totalTime, &deltaHour, &deltaMinute);
 
 	//display the info
